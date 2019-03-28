@@ -1,0 +1,22 @@
+
+Hangman Game Psuedocode:
+
+1. Create an array of possible words.
+
+2. Choose word randomly from array.
+
+3. Create underscores dependent on length of chosen word.
+
+4. User guesses one char at a time.
+	a.) user can only guess same char once.
+	b.) displays number of guesses remaining.
+
+5. Check if answer is right.
+	a.) if right then push char to right array.
+	b.) if wrong then push char to wrong array.
+
+6. If guess all letters correct then show image and play song. (Wins++)
+
+7. If guess too many times wrong then show lose image and play song. (Loss ++)
+
+7. Create variables to keep track of win/loss.

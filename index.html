@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nostalgic Hangman</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Roboto:300" rel="stylesheet">
+    <!-- Reset -->
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <!-- Personal Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Introduction page with rules -->
+    <div id="intro-page">
+        <div class="header-grid">
+            <h1 class="header-title">Nostalgic 90's Hangman</h1>
+        </div>
+        <div id="rules-grid">
+            <ul id="intro-rules">
+                <li>Test your 90's trivia with this throw back Hangman game!!</li>
+                <li>Use the keyboard to guess the 90's Toon word or phrase.</li>
+            </ul>
+        </div>
+        <div id="start-grid">
+            <div id="intro-start">Press ANY key to play!</div>
+        </div>
+    </div>
+    <!-- Game Content page -->
+    <div id="game-page">
+        <div class="header-grid">
+            <img src="https://fontmeme.com/permalink/190328/83a33d0da5be4afea8899cd71b0c2ebc.png" alt="">
+        </div>
+        <div id="picture-grid">
+            <img id="canvas1" src="assets/images/hey arnold.png" alt="">
+        </div>
+        <div id="score-grid">
+            <div class="wins-text">
+                <P>Wins: </P>
+                <p id="wins">0</p>
+                <br>
+                <p>Lives Left:</p>
+                <p id="lives-left">9</p>
+            </div>
+        </div>
+        <div id="underscore-grid">
+            <div class="underscore">_ _ _ _ _ _ _</div>
+            <div class="right-guess"></div>
+        </div>
+        <div id="guess-bank-grid">
+            <div class="bank-title">
+                <p>Guessed:</p> 
+                <p id="wrong-guesses">a, b, c, d, e, f, g, h</p>
+            </div>
+        </div>
+        <div id="button-grid">
+            <button class="next-btn">Next Word</button>
+            <button class="retry-btn">Try Again</button>
+        </div>
+    </div>
+</body>
+</html>
