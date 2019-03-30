@@ -7,7 +7,7 @@ Hangman Game Psuedocode:
 
 3. Create underscores dependent on length of chosen word.
 
-4. User guesses one char at a time.
+4. Capture user input and char at a time.
 	a.) user can only guess same char once.
 	b.) displays number of guesses remaining.
 

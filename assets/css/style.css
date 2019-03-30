@@ -11,90 +11,149 @@ body {
 
 p {
     font-family: 'Baloo Chettan', cursive;
-    padding-bottom: 1em;
+    padding: 0.5em 0em;
 }
 
 img {
-    width: 100%;
     height: 100%;
     border-radius: 10px;
 }
 
-/* Sets font size for score and letters*/
+/* * * * Header Styles * * * */
+.header-container {
+    max-width: 960px;
+    margin: auto;
+    margin-top: 1em;
+    display: grid;
+}
+
+.header-grid {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.header-grid img {
+    width: 80%;
+    margin: auto;
+    padding: 0.5em;
+    background: rgb(0, 0, 0);
+    box-shadow: 0px 5px 15px -2px white;
+}
+
+/* Introduction Page Styles */
+#intro-container {
+    margin: auto;
+    max-width: 960px;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    padding: 0em 0.5em;
+}
+
+#intro-page {
+    width: 70%;
+    margin: auto;
+}
+
+#intro-grid {
+    background: rgb(255, 125, 1);
+    color: white;
+    text-align: center;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 30px 10px rgba(0,0,0,.75);
+}
+#start-grid {
+    background: rgb(0, 199, 17);
+    color: white;
+    width: 40%;
+    margin: auto;
+    margin-top: 1.5em;
+    text-align: center;
+    padding: 0.25em;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 30px 10px rgba(0,0,0,.75);
+}
+
+/* * * * Game Page Styles * * * */
+#game-container {
+    margin: auto;
+    margin-bottom: 1em;
+    padding: 0em 0.5em;
+    max-width: 960px;
+    display: none;
+}
+
+#game-container img {
+    width: 100%;
+}
+
+/* Sets font size for score and letters-guessed */
 #wins, 
 #lives-left, 
 #wrong-guesses {
     font-family: 'Roboto', sans-serif;
 }
 
-/* Sets Intro-Page to grid */
-#intro-page {
-    display: none;
-    width: 960px;
-}
-
 /* Sets Game Page to grid */
 #game-page {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-gap: 1em;
-    max-width: 960px;
-    margin: auto;
-    margin-top: 2em;
-}
-
-/* Makes header full width of container */
-.header-grid {
-    grid-column-start: 1;
-    grid-column-end: 4;
-    text-align: center;
-    margin-bottom: 2em;
-}
-
-.header-title {
-    font-size: 2.5em;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 0.5em;
 }
 
 /* Position the game's picture canvas */
 #picture-grid {
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
     background: rgb(255, 125, 1);
-    border: 2px solid white;
     border-radius: 10px;
     text-align: center;
     padding: 1em;
+    box-shadow: inset 0px 0px 30px 10px rgba(0,0,0,.75);
 }
 
 /* Positions underscores under canvas */
 #underscore-grid {
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     grid-row-start: 3;
     grid-row-end: 4;
     text-align: center;
-    font-size: 3em;
+}
+
+#underscore-text {
+    font-size: 2em;
+    color: rgb(0, 199, 17);
+    padding-top: 0;
+}
+
+#current-word {
+    padding: 0.5em;
 }
 
 /* Positions buttons under underscores */
 #button-grid {
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     grid-row-start: 4;
     grid-row-end: 5;
     text-align: center;
+    display: none;
 }
 
-/* Position scores-grid next to canvas */
+/* Position scores-grid next to canvas. */
 #score-grid {
-    grid-column-start: 3;
-    grid-column-end: 4;
+    grid-column-start: 4;
+    grid-column-end: 5;
     grid-row-start: 2;
     grid-row-end: 3;
     background: rgb(255,125,1);
-    border: 2px solid white;
+    box-shadow: inset 0px 0px 30px 10px rgba(0,0,0,.75);
     border-radius: 10px;
     padding: 1em;
     text-align: center;
@@ -106,19 +165,84 @@ img {
     color: white;
 }
 
-/* Position guess-bank under score */
+/* Position guess-bank under the score-grid */
 #guess-bank-grid {
-    grid-column-start: 3;
-    grid-column-end: 4;
+    grid-column-start: 4;
+    grid-column-end: 5;
     grid-row-start: 3;
     grid-row-end: 5;
     background: rgb(255,125,1);
-    border: 2px solid white;
+    box-shadow: inset 0px 0px 30px 10px rgba(0,0,0,.75);
     border-radius: 10px;
     padding: 0.75em;
     text-align: center;
 }
 
-#guess-bank-grid p {
+#guess-bank {
+    color: white;
+    font-family: 'Baloo Chettan', cursive;
+
+}
+
+/* Positions right-guesses and toggles display */
+
+#wrong-guesses {
+    width: 100%;
+    letter-spacing: 0.25em;
+}
+
+/******** Footer ********/
+footer{
+    background: rgb(255,125,1);
+    box-shadow: inset 0px 0px 30px 10px rgba(0,0,0,.75);
+}
+
+#footer-info {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+#footer-info > ul {
+    margin: 0;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.65em;
+}
+
+#footer-info > ul li {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+#footer-info > ul li a {
+    display: block;
+    text-align: center;
+    padding: 1em 2em;
+}
+
+.footerLinks a {
     color: white;
 }
+
+.footerLinks a:hover {
+    color: rgb(0, 255, 21);
+}
+
+/******* Keeps Footer at Bottom of Screen*******/
+.sticky-footer{
+    flex: 1 0 auto;
+ }
+ 
+ html, body {
+     height: 100%;
+ }
+ 
+ body {
+     display: flex;
+     flex-direction: column;
+     height: 100vh;
+ }
+ 
+ 

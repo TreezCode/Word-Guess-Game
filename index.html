@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nostalgic Hangman</title>
@@ -11,53 +11,67 @@
     <!-- Personal Stylesheet -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
+
 <body>
-    <!-- Introduction page with rules -->
-    <div id="intro-page">
-        <div class="header-grid">
-            <h1 class="header-title">Nostalgic 90's Hangman</h1>
+    <div class="sticky-footer">
+        <div class="header-container">
+            <div class="header-grid">
+                <img src="https://fontmeme.com/permalink/190328/e9119d31747771858bb9abacabd10a73.png" alt="">
+            </div>
         </div>
-        <div id="rules-grid">
-            <ul id="intro-rules">
-                <li>Test your 90's trivia with this throw back Hangman game!!</li>
-                <li>Use the keyboard to guess the 90's Toon word or phrase.</li>
+        <div id="intro-container">
+            <div id="intro-page">
+                <div id="intro-grid">
+                    <p>Welcome to a little throwback toon hangman</p>
+                </div>
+                <div id="intro-grid">
+                    <p>Here you will test your 90's cartoon knowlege.</p>
+                    <p>Lets see if you have what it takes to be a true 90's toon master!</p>
+                </div>
+                <div id="start-grid">
+                    <p>Press ANY key to PLAY!</p>
+                </div>
+            </div>
+        </div>
+        <div id="game-container">
+            <!-- Game Content-->
+            <div id="game-page">
+                <div id="picture-grid">
+                    <img id="hangman-image" src="assets/images/hangman0.png" alt="">
+                </div>
+                <div id="underscore-grid">
+                    <p id="current-word">Current Word/Phrase:</p>
+                    <p id="underscore-text"></p>
+                </div>
+                <div id="score-grid">
+                    <div class="score-wrap">
+                        <P>Wins: <br><br><span id="wins-text"></span></p>
+                        <P>Losses: <br><br><span id="losses-text"></span></p>
+                        <p>Lives Left: <br><br><span id="lives-counter"></span></p>
+                        <p id="alert-text"></p>
+                    </div>
+                </div>
+                <div id="guess-bank-grid">
+                        <p id="guess-bank">Guessed: <br><br><span id="wrong-guesses"></span></p>
+                </div>
+                <div id="button-grid">
+                    <button class="next-btn">Next Word</button>
+                    <button class="retry-btn">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div id="footer-info">
+            <ul>
+                <li class="footerLinks"><a href="mailto:Jkube537@gmail.com">Email: Jkube537@gmail.com</a></li>
+                <li class="footerLinks"><a href="https://github.com/TreezCode/TreezCode.github.io" target="_blank">GitHub: TreezCode</a></li>
+                <li class="footerLinks"><a href="https://scratch.mit.edu/users/iamtreez/" target="_blank">ScratchMIT: iamTreez</a></li>
             </ul>
         </div>
-        <div id="start-grid">
-            <div id="intro-start">Press ANY key to play!</div>
-        </div>
-    </div>
-    <!-- Game Content page -->
-    <div id="game-page">
-        <div class="header-grid">
-            <img src="https://fontmeme.com/permalink/190328/83a33d0da5be4afea8899cd71b0c2ebc.png" alt="">
-        </div>
-        <div id="picture-grid">
-            <img id="canvas1" src="assets/images/hey arnold.png" alt="">
-        </div>
-        <div id="score-grid">
-            <div class="wins-text">
-                <P>Wins: </P>
-                <p id="wins">0</p>
-                <br>
-                <p>Lives Left:</p>
-                <p id="lives-left">9</p>
-            </div>
-        </div>
-        <div id="underscore-grid">
-            <div class="underscore">_ _ _ _ _ _ _</div>
-            <div class="right-guess"></div>
-        </div>
-        <div id="guess-bank-grid">
-            <div class="bank-title">
-                <p>Guessed:</p> 
-                <p id="wrong-guesses">a, b, c, d, e, f, g, h</p>
-            </div>
-        </div>
-        <div id="button-grid">
-            <button class="next-btn">Next Word</button>
-            <button class="retry-btn">Try Again</button>
-        </div>
-    </div>
+    </footer>
+
+    <script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
+
 </html>
