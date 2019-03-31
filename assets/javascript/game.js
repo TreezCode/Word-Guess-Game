@@ -1,106 +1,115 @@
 
-// * * * * Global Variables. * * * * //
-var wins = 0;
-var losses = 0;
-var lives = 13;
-var underscore = [];
-var wrongGuesses = [];
+// GLOBAL VARIABLES
+// ==========================================================
+// Arrays and variables for holding data
+var wordBank = ["all that", "angelica", "dagget", "norbert", "arnold", "catdog", "chuckie", "courage", "cow", "chicken", "darwin", "dexter", "donnie", "doubledare", "doug", "ed", "edd", "edddy", "eliza", "gerald", "guts", "heffer", "helga", "ickis", "zim", "johnny", "kablam", "kenan", "kel", "krumm", "olmec", "lil", "nigel", "oblina", "otto", "patrick", "patti", "phil", "philbert", "pinky", "plank", "prometheus", "regina", "rocko", "roger", "rugrats", "skeeter", "squid", "susie", "thebrain", "tommy", "twister"];
 
-// * * * * Create an array of words and phrases. * * * * //
-var wordBank = ["allthat", "angelica", "dagget", "norbert", "arnold", "catdog", "chuckie", "courage", "cow", "chicken", "darwin", "dexter", "donnie", "doubledare", "doug", "ed", "edd", "edddy", "eliza", "gerald", "guts", "heffer", "helga", "ickis", "zim", "johnny", "kablam", "kenan", "kel", "krumm", "olmec", "lil", "nigel", "oblina", "otto", "patrick", "patti", "phil", "philbert", "pinky", "plank", "prometheus", "regina", "rocko", "roger", "rugrats", "skeeter", "squid", "susie", "thebrain", "tommy", "twister"];
-
-// * * * * Choose a random word or phrase. * * * * //
-var randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
-console.log(randomWord);
-
-// randomWord = randomWord.replace(/\s/g, "-");
-// console.log (randomWord)
-
-//  * * * * Create array of images for hangman canvas. * * * * //
 var hangmanImage = document.getElementById("hangman-image");
 var hangmanArray = ["assets/images/hangman0.png", "assets/images/hangman1.png", "assets/images/hangman2.jpg", "assets/images/hangman3.jpg", "assets/images/hangman4.jpg", "assets/images/hangman5.jpg", "assets/images/hangman6.jpg", "assets/images/hangman7.jpg", "assets/images/hangman8.jpg", "assets/images/hangman9.jpg", "assets/images/hangman10.jpg", "assets/images/hangman11.jpg", "assets/images/hangman12.jpg", "assets/images/hangman13.jpg"]
 var hangmanIndex = 1;
 
-document.getElementById("wins-text").textContent = wins;
-document.getElementById("losses-text").textContent = losses;
-document.getElementById("underscore-text").textContent = underscore.join("");
-document.getElementById("wrong-guesses").textContent = wrongGuesses.join("");
-document.getElementById("alert-text").textContent = "";
-document.getElementById("lives-counter").textContent = lives;
+var selectWord = "";
+var lettersInWord = [];
+var numBlanks = 0;
+var blanksAndSuccesses = [];
+var wrongLetters = []; 
 
-// * * * * Create underscore dependent on randomWord length.* * * * //
-var createUnderscores = () => {
-    for (var i = 0; i < randomWord.length; i++) {
-        underscore.push("_ ");
-    }
-    document.getElementById("underscore-text").textContent = underscore.join("");
-}
-createUnderscores();
+// Game counters
+var winCount = 0;
+var lossCount = 0;
+var guessesLeft = 13;
 
-// NEED TO FIX SPACE BUG IN UNDERSCORES //
+// FUNCTIONS
+// ==========================================================
 
-// * * * * If user presses any key the game will start. * * * * //
-document.onkeydown = function (event) {
-    gameStart(event.key);
+function startGame () {
+    selectWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+    lettersInWord = selectWord.split("");
+    numBlanks = lettersInWord.length;
 
-    // * * * * Capture user guess.* * * * //
-    document.onkeydown = function (event) {
+    // Reset
+    guessesLeft = 13;
+    wrongLetters = [];
+    blanksAndSuccesses = [];
 
-        var userGuess = event.key.toLowerCase();
-
-        if (event.keyCode >= 65 && event.keyCode <= 90) {
-            console.log(userGuess);
-            evaluateGuess(userGuess);
-        } else {
-            document.getElementById("alert-text").textContent = "Please select a valid letter.";
+    for (var i = 0; i < numBlanks; i++) {
+        if (selectWord[i] === " ") {
+            blanksAndSuccesses.push("- ");
+        } else 
+        {
+            blanksAndSuccesses.push("_ ");
         }
     }
+
+    // Display HTML to reflect conditions
+    document.getElementById("wordToGuess").innerHTML = blanksAndSuccesses.join("");
+    document.getElementById("numGuesses").innerHTML = guessesLeft;
+    document.getElementById("winCounter").innerHTML = winCount;
+    document.getElementById("lossCounter").innerHTML = lossCount;
+
+    // Testing
+    console.log(selectWord);
+    console.log(lettersInWord);
+    console.log(numBlanks);
+    console.log(blanksAndSuccesses);
 }
 
-// * * * * Evaluate letter guessed. * * * * //
-var evaluateGuess = (letter) => {
+function checkLetters(letter) {
 
-    if (wrongGuesses.includes(letter)) {
-        document.getElementById("alert-text").textContent = "You've already guessed that letter.";
-    } else {
-        if (randomWord.indexOf(letter) === -1) {
-            wrongGuesses.push(letter);
-            lives--;
-            changeHangman();
-            if (lives === 0) {
-                losses++;
-            }
-            document.getElementById("lives-counter").textContent = lives;
-            document.getElementById("wrong-guesses").textContent = wrongGuesses.join("");
-            document.getElementById("losses-text").textContent = losses;
+    // Check if letter exists in code at all
+    var isLetterInWord = false;
+    for(var i=0; i<numBlanks; i++) {
+        if(selectWord[i] == letter) {
+            isLetterInWord = true;
         }
-        else {
-            for (var i = 0; i < randomWord.length; i++) {
-                if (randomWord[i] === letter) {
-                    underscore.splice(i, 1, letter + " ");
-                    document.getElementById("underscore-text").textContent = underscore.join("");
-                }
-            }
-            if (underscore.join("").replace(/\s/g, "") === randomWord) {
-                handleWin();
+    }
+
+    // Check where in the word letter exists, then populate blanksandsuccesses array
+    if(isLetterInWord) {
+        for(var i=0; i<numBlanks; i++) {
+            if(selectWord[i] == letter) {
+                blanksAndSuccesses[i] = letter;
             }
         }
     }
-}
 
-
-// * * * * FUNTIONS * * * * //
-var gameStart = () => {
-    document.getElementById("intro-container").style.display = "none";
-    document.getElementById("game-container").style.display = "grid";
-}
-
-var gameReset = () => {
+    // Letter wasn't found
+    else {
+        wrongLetters.push(letter);
+        changeHangman();
+        guessesLeft--
+    }
+    console.log(blanksAndSuccesses);
     
 }
-var handleWin = () => {
-    wins++;
-    document.getElementById("wins-text").textContent = wins;
+
+function roundComplete() {
+    console.log("Wins Count: " + winCount + "| Loss Count: " + lossCount + " | Guesses Left: " + guessesLeft);
+
+    // Update the HTML to reflect the most recent count stats
+    document.getElementById("numGuesses").innerHTML = guessesLeft;
+    document.getElementById("wordToGuess").innerHTML = blanksAndSuccesses.join(" ");
+    document.getElementById("wrongGuesses").innerHTML = wrongLetters.join(" ");
+
+
+    // Cheeck if user won
+    if(lettersInWord.toString() == blanksAndSuccesses.toString()) {
+        hangmanImage.setAttribute("src", hangmanArray[0]);
+        winCount++;
+        // Update the win counter in the HTML
+        document.getElementById("winCounter").innerHTML = winCount;
+
+        setTimeout(startGame, 500);
+    }
+
+    // Check if usr lost
+    else if (guessesLeft == 0) {
+        lossCount++;
+        hangmanIndex = 0;
+        // Update the HTML
+        document.getElementById("lossCounter").innerHTML = lossCount;
+        setTimeout(startGame, 500);
+    }
 }
 
 var changeHangman = () => {
@@ -109,4 +118,16 @@ var changeHangman = () => {
     if (hangmanIndex > hangmanArray.length) {
         hangmanIndex = 0;
     }
+}
+
+// MAIN LOGIC
+//============================================================
+startGame();
+
+document.onkeyup = function (event) {
+    var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+    checkLetters(letterGuessed);
+    roundComplete();
+
+    console.log(letterGuessed);
 }
