@@ -54,7 +54,7 @@ img {
 #intro-page {
     width: 70%;
     margin: auto;
-    display: none;
+    /* display: none; */
 }
 
 #intro-grid {
@@ -84,7 +84,7 @@ img {
     margin-bottom: 1em;
     padding: 0em 0.5em;
     max-width: 960px;
-    /* display: none; */
+    display: none;
 }
 
 #game-container img {
@@ -92,7 +92,8 @@ img {
 }
 
 /* Sets font size for score and letters-guessed */
-#winCounter, 
+#winCounter,
+#lossCounter, 
 #numGuesses, 
 #wrongGuesses {
     font-family:  'Roboto', sans-serif;
@@ -128,6 +129,7 @@ img {
 }
 
 h2 {
+    font-family: 'Baloo Chettan', cursive;
     font-size: 2em;
     color: rgb(0, 199, 17);
     padding-top: 0;
@@ -135,6 +137,7 @@ h2 {
 
 #current-word {
     padding: 0.5em;
+    color: rgb(0, 199, 17);
 }
 
 /* Positions buttons under underscores */
@@ -245,5 +248,4 @@ footer{
      flex-direction: column;
      height: 100vh;
  }
- 
  
