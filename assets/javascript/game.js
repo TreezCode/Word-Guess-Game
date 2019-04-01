@@ -2,58 +2,57 @@
 // GLOBAL VARIABLES
 // ==========================================================
 // Arrays and variables for holding data
-var wordBank = ["allthat", "dagget", "norbert", "arnold", "catdog", "chuckie", "courage", "cow", "chicken", "dexter", "donnie", "doubledare", "doug", "ed", "edd", "edddy", "eliza", "gerald", "guts", "heffer", "helga", "ickis", "zim", "kablam", "kenan", "kel", "krumm", "olmec", "oblina", "otto", "patrick", "patti", "philbert", "pinky", "plank", "prometheus", "regina", "rocko", "roger", "rugrats", "skeeter", "squidward", "tommy"];
-
+var wordBank = ["all that", "angry beavers", "arnold", "catdog", "courage", "cow", "chicken", "dexters laboratory", "double dare", "doug funny", "eliza", "gerald", "global guts", "heffer", "helga", "hey arnold", "ickis", "invader zim", "johnny bravo", "kablam", "krumm", "oblina", "otto", "patrick", "patti mayonaise", "philbert", "plank", "prometheus", "regina", "rocket power", "rocko", "roger klotz", "rugrats", "skeeter valentine", "squidward", "tommy pickles"];
 var hangmanArray = ["assets/images/hangman0.png", "assets/images/hangman1.png", "assets/images/hangman2.jpg", "assets/images/hangman3.jpg", "assets/images/hangman4.jpg", "assets/images/hangman5.jpg", "assets/images/hangman6.jpg", "assets/images/hangman7.jpg", "assets/images/hangman8.jpg", "assets/images/hangman9.jpg", "assets/images/hangman10.jpg", "assets/images/hangman11.jpg", "assets/images/hangman12.jpg", "assets/images/hangman13.jpg"]
 var hangmanImage = document.getElementById("hangman-image");
-
 var selectWord = "";
 var lettersInWord = [];
-var numBlanks = 0;
-var blanksAndSuccesses = [];
+var numOfLetters = 0;
+var hiddenWord = [];
 var wrongLetters = [];
 
-// Game counters
+// Score counters
 var winCount = 0;
 var lossCount = 0;
 var guessesLeft = 13;
 
 // FUNCTIONS
 // =====================================================
-
 function startGame() {
+
     selectWord = wordBank[Math.floor(Math.random() * wordBank.length)];
     lettersInWord = selectWord.split("");
-    numBlanks = lettersInWord.length;
+    numOfLetters = lettersInWord.length;
+    var space = selectWord.indexOf(" ");
 
     // Reset
     guessesLeft = 13;
     wrongLetters = [];
-    blanksAndSuccesses = [];
+    hiddenWord = [];
     hangmanIndex = 1;
     hangmanImage.setAttribute("src", "assets/images/hangman0.png");
-    
-    
-    for (var i = 0; i < numBlanks; i++) {
-        if (selectWord[i] === " ") {
-            blanksAndSuccesses.push("&nbsp;");
-        } else {
-            blanksAndSuccesses.push("_ ");
-        }
+
+    // Creates underscores to hide word in HTML.
+    for (var i = 0; i < numOfLetters; i++) {
+        hiddenWord.push("_");
     }
+    // Removes any space from the array of letters and replaces it with a space (white space issue RESOLVED)
+    if (space !== -1) {
+        hiddenWord.splice(space, 1, " ");
+    }
+    console.log(selectWord);
 
     // Display HTML to reflect conditions
-    document.getElementById("wordToGuess").innerHTML = blanksAndSuccesses.join("");
+    document.getElementById("wordToGuess").innerHTML = hiddenWord.join("");
     document.getElementById("numGuesses").innerHTML = guessesLeft;
     document.getElementById("winCounter").innerHTML = winCount;
     document.getElementById("lossCounter").innerHTML = lossCount;
 
-
     // Testing
     // console.log(selectWord);
-    console.log(lettersInWord);
-    // console.log(numBlanks);
-    // console.log(blanksAndSuccesses);
+    // console.log(lettersInWord);
+    // console.log(numOfLetters);
+    // console.log(hiddenWord);
 }
 
 function checkLetters(letter) {
@@ -67,7 +66,7 @@ function checkLetters(letter) {
 
         // Check if letter exists in code at all
         var isLetterInWord = false;
-        for (var i = 0; i < numBlanks; i++) {
+        for (var i = 0; i < numOfLetters; i++) {
             if (selectWord[i] == letter) {
                 isLetterInWord = true;
             }
@@ -78,9 +77,9 @@ function checkLetters(letter) {
 
         // Check where in the word letter exists, then populate blanksandsuccesses array
         if (isLetterInWord) {
-            for (var i = 0; i < numBlanks; i++) {
+            for (var i = 0; i < numOfLetters; i++) {
                 if (selectWord[i] == letter) {
-                    blanksAndSuccesses[i] = letter;
+                    hiddenWord[i] = letter;
                 }
             }
         }
@@ -91,148 +90,138 @@ function checkLetters(letter) {
             changeHangman();
             guessesLeft--
         }
-        // console.log(blanksAndSuccesses);
+        // console.log(hiddenWord);
     }
 }
 
 function roundComplete() {
-    // console.log("Wins Count: " + winCount + "| Loss Count: " + lossCount + " | Guesses Left: " + guessesLeft);
 
     // Update the HTML to reflect the most recent count stats
     document.getElementById("numGuesses").innerHTML = guessesLeft;
-    document.getElementById("wordToGuess").innerHTML = blanksAndSuccesses.join(" ");
+    document.getElementById("wordToGuess").innerHTML = hiddenWord.join(" ");
     document.getElementById("wrongGuesses").innerHTML = wrongLetters.join(" ");
 
     // Cheeck if user won
-    if (lettersInWord.toString() == blanksAndSuccesses.toString()) {
+    if (lettersInWord.toString() == hiddenWord.toString()) {
+        // Add wins
         winCount++;
-
+       
         // Display image on win
-        if (selectWord === "allthat") {
-            hangmanImage.setAttribute("src", "assets/images/allthat.gif");
-        }
-        if (selectWord === "arnold") {
+        switch (selectWord) {
+            case "all that":
+            hangmanImage.setAttribute("src", "assets/images/angry-beavers.png");
+            break;
+            case "arnold":
             hangmanImage.setAttribute("src", "assets/images/arnold.jpg");
-        }
-        if (selectWord === "catdog") {
+            break;
+            case "angelica":
+            hangmanImage.setAttribute("src", "assets/images/angelica.jpg");
+            break;
+            case "catdog":
             hangmanImage.setAttribute("src", "assets/images/catdog.jpg");
-        }
-        if (selectWord === "dagget") {
-            hangmanImage.setAttribute("src", "assets/images/angry-beavers.png");
-        }
-        if (selectWord === "norbert") {
-            hangmanImage.setAttribute("src", "assets/images/angry-beavers.png");
-        }
-        if (selectWord === "chuckie") {
+            break;
+            case "chuckie":
             hangmanImage.setAttribute("src", "assets/images/chuckie.jpg");
-        }
-        if (selectWord === "courage") {
+            break;
+            case "courage":
             hangmanImage.setAttribute("src", "assets/images/courage-cowardly-dog.jpg");
-        }
-        if (selectWord === "cow") {
+            break;
+            case "cow":
             hangmanImage.setAttribute("src", "assets/images/cowAndChicken.jpg");
-        }
-        if (selectWord === "chicken") {
+            break;
+            case "chicken":
             hangmanImage.setAttribute("src", "assets/images/cowAndChicken.jpg");
-        }
-        if (selectWord === "dexter") {
+            break;
+            case "dexters laboratory":
             hangmanImage.setAttribute("src", "assets/images/dexters-lab.jpg");
-        }
-        if (selectWord === "doubledare") {
+            break;
+            case "double dare":
             hangmanImage.setAttribute("src", "assets/images/double_dare_logo.png");
-        }
-        if (selectWord === "doug") {
+            break;
+            case "doug funny":
             hangmanImage.setAttribute("src", "assets/images/doug.jpg");
-        }
-        if (selectWord === "ed") {
-            hangmanImage.setAttribute("src", "assets/images/ed-edd-eddy.jpg");
-        }
-        if (selectWord === "edd") {
-            hangmanImage.setAttribute("src", "assets/images/ed-edd-eddy.jpg");
-        }
-        if (selectWord === "eddy") {
-            hangmanImage.setAttribute("src", "assets/images/ed-edd-eddy.jpg");
-        }
-        if (selectWord === "eliza") {
+            break;
+            case "eliza":
             hangmanImage.setAttribute("src", "assets/images/eliza.jpg");
-        }
-        if (selectWord === "gerald") {
+            break;
+            case "gerald":
             hangmanImage.setAttribute("src", "assets/images/gerald.jpg");
-        }
-        if (selectWord === "guts") {
+            break;
+            case "global guts":
             hangmanImage.setAttribute("src", "assets/images/guts.jpg");
-        }
-        if (selectWord === "heffer") {
+            break;
+            case "heffer":
             hangmanImage.setAttribute("src", "assets/images/heffer.jpg");
-        }
-        if (selectWord === "helga") {
+            break;
+            case "helga":
             hangmanImage.setAttribute("src", "assets/images/helga.jpg");
-        }
-        if (selectWord === "ickis") {
+            break;
+            case "hey arnold":
+            hangmanImage.setAttribute("src", "assets/images/hey arnold.png");
+            break;
+            case "ickis":
             hangmanImage.setAttribute("src", "assets/images/ickis.jpg");
-        }
-        if (selectWord === "kablam") {
+            break;
+            case "invader zim":
+            hangmanImage.setAttribute("src", "assets/images/invaderZim.jpg");
+            break;
+            case "johnny bravo":
+            hangmanImage.setAttribute("src", "assets/images/johhnyBravo.jpg");
+            break;
+            case "kablam":
             hangmanImage.setAttribute("src", "assets/images/kablam.jpg");
-        }
-        if (selectWord === "kenan") {
-            hangmanImage.setAttribute("src", "assets/images/Kenan_&_Kel.jpg");
-        }
-        if (selectWord === "kel") {
-            hangmanImage.setAttribute("src", "assets/images/Kenan_&_Kel.jpg");
-        }
-        if (selectWord === "krumm") {
+            break;
+            case "krumm":
             hangmanImage.setAttribute("src", "assets/images/krumm.jpg");
-        }
-        if (selectWord === "olmec") {
-            hangmanImage.setAttribute("src", "assets/images/legendsofthehiddentemple.jpg");
-        }
-        if (selectWord === "oblina") {
+            break;
+            case "oblina":
             hangmanImage.setAttribute("src", "assets/images/oblina.jpg");
-        }
-        if (selectWord === "otto") {
+            break;
+            case "otto":
             hangmanImage.setAttribute("src", "assets/images/otto.jpg");
-        }
-        if (selectWord === "patrick") {
+            break;
+            case "patti mayonaise":
+            hangmanImage.setAttribute("src", "assets/images/allthat.gif");
+            break;
+            case "patrick":
             hangmanImage.setAttribute("src", "assets/images/patrick.jpg");
-        }
-        if (selectWord === "pinky") {
-            hangmanImage.setAttribute("src", "assets/images/pinkyTheBrain.jpg.jpg");
-        }
-        if (selectWord === "plank") {
+            break;
+            case "philbert":
+            hangmanImage.setAttribute("src", "assets/images/philbert.jpg");
+            break;
+            case "plank":
             hangmanImage.setAttribute("src", "assets/images/plank.jpg");
-        }
-        if (selectWord === "prometheus") {
+            break;
+            case "prometheus":
             hangmanImage.setAttribute("src", "assets/images/pro-bob.jpg");
-        }
-        if (selectWord === "regina") {
+            break;
+            case "regina":
             hangmanImage.setAttribute("src", "assets/images/regina.jpg");
-        }
-        if (selectWord === "rocko") {
+            break;
+            case "rocko":
             hangmanImage.setAttribute("src", "assets/images/rockos.jpg");
-        }
-        if (selectWord === "roger") {
+            break;
+            case "roger klotz":
             hangmanImage.setAttribute("src", "assets/images/roger.jpg");
-        }
-        if (selectWord === "rugrats") {
+            break;
+            case "rugrats":
             hangmanImage.setAttribute("src", "assets/images/Rugrats.png");
-        }
-        if (selectWord === "skeeter") {
+            break;
+            case "skeeter valentine":
             hangmanImage.setAttribute("src", "assets/images/skeeter.jpg");
-        }
-        if (selectWord === "spongebob") {
+            break;
+            case "spongebob squarepants":
             hangmanImage.setAttribute("src", "assets/images/spongebob.jpg");
-        }
-        if (selectWord === "tommy") {
+            break;
+            case "squidward":
+            hangmanImage.setAttribute("src", "assets/images/squidward.jpg");
+            break;
+            case "tommy pickles":
             hangmanImage.setAttribute("src", "assets/images/tommy.jpg");
+            break;            
         }
-        if (selectWord === "thornberrys") {
-            hangmanImage.setAttribute("src", "assets/images/wild_thornberrys.jpg");
-        }
-        if (selectWord === "zim") {
-            hangmanImage.setAttribute("src", "assets/images/invader-zim.jpg");
-        }
-        
-        // Update the win counter in the HTML
+
+        // Update the win counter in HTML
         document.getElementById("winCounter").innerHTML = winCount;
         setTimeout(startGame, 2500);
     }
@@ -241,7 +230,7 @@ function roundComplete() {
     else if (guessesLeft == 0) {
         lossCount++;
 
-        // Update the HTML
+        // Update the loss counter in HTML
         document.getElementById("lossCounter").innerHTML = lossCount;
         setTimeout(startGame, 1500);
     }

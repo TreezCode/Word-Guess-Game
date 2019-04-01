@@ -119,6 +119,10 @@ img {
     box-shadow: inset 0px 0px 30px 10px rgba(0,0,0,.75);
 }
 
+#picture-grid img {
+    max-height: 450px;
+}
+
 /* Positions "_" and right guesses under canvas */
 #underscore-grid {
     grid-column-start: 1;
@@ -138,6 +142,10 @@ h2 {
 #current-word {
     padding: 0.5em;
     color: rgb(0, 199, 17);
+}
+
+#wordToGuess {
+    white-space: pre;
 }
 
 /* Positions buttons under underscores */
