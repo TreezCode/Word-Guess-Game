@@ -137,6 +137,7 @@ h2 {
     font-size: 2em;
     color: rgb(0, 199, 17);
     padding-top: 0;
+    letter-spacing: 2px;
 }
 
 #current-word {

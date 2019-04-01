@@ -2,7 +2,7 @@
 // GLOBAL VARIABLES
 // ==========================================================
 // Arrays and variables for holding data
-var wordBank = ["all that", "angry beavers", "arnold", "catdog", "courage", "cow", "chicken", "dexters laboratory", "double dare", "doug funny", "eliza", "gerald", "global guts", "heffer", "helga", "hey arnold", "ickis", "invader zim", "johnny bravo", "kablam", "krumm", "oblina", "otto", "patrick", "patti mayonaise", "philbert", "plank", "prometheus", "regina", "rocket power", "rocko", "roger klotz", "rugrats", "skeeter valentine", "squidward", "tommy pickles"];
+var wordBank = ["all that", "angry beavers", "arnold", "catdog", "courage", "cow", "chicken", "dexters laboratory", "double dare", "doug funny", "eliza", "gerald", "global guts", "heffer", "helga", "hey arnold", "ickis", "invader zim", "johnny bravo", "kablam", "krumm", "oblina", "otto", "patrick", "patti mayonaise", "philbert", "plank", "prometheus", "reggie", "rocket power", "rocko", "roger klotz", "rugrats", "skeeter valentine", "squidward", "tommy pickles"];
 var hangmanArray = ["assets/images/hangman0.png", "assets/images/hangman1.png", "assets/images/hangman2.jpg", "assets/images/hangman3.jpg", "assets/images/hangman4.jpg", "assets/images/hangman5.jpg", "assets/images/hangman6.jpg", "assets/images/hangman7.jpg", "assets/images/hangman8.jpg", "assets/images/hangman9.jpg", "assets/images/hangman10.jpg", "assets/images/hangman11.jpg", "assets/images/hangman12.jpg", "assets/images/hangman13.jpg"]
 var hangmanImage = document.getElementById("hangman-image");
 var selectWord = "";
@@ -45,6 +45,7 @@ function startGame() {
     // Display HTML to reflect conditions
     document.getElementById("wordToGuess").innerHTML = hiddenWord.join("");
     document.getElementById("numGuesses").innerHTML = guessesLeft;
+    document.getElementById("wrongGuesses").innerHTML = "";
     document.getElementById("winCounter").innerHTML = winCount;
     document.getElementById("lossCounter").innerHTML = lossCount;
 
@@ -98,7 +99,7 @@ function roundComplete() {
 
     // Update the HTML to reflect the most recent count stats
     document.getElementById("numGuesses").innerHTML = guessesLeft;
-    document.getElementById("wordToGuess").innerHTML = hiddenWord.join(" ");
+    document.getElementById("wordToGuess").innerHTML = hiddenWord.join("");
     document.getElementById("wrongGuesses").innerHTML = wrongLetters.join(" ");
 
     // Cheeck if user won
@@ -145,7 +146,7 @@ function roundComplete() {
             hangmanImage.setAttribute("src", "assets/images/doug.jpg");
             break;
             case "eliza":
-            hangmanImage.setAttribute("src", "assets/images/eliza.jpg");
+            hangmanImage.setAttribute("src", "assets/images/wild_thornberrys.jpg");
             break;
             case "gerald":
             hangmanImage.setAttribute("src", "assets/images/gerald.jpg");
@@ -163,7 +164,7 @@ function roundComplete() {
             hangmanImage.setAttribute("src", "assets/images/hey arnold.png");
             break;
             case "ickis":
-            hangmanImage.setAttribute("src", "assets/images/ickis.jpg");
+            hangmanImage.setAttribute("src", "assets/images/ahhRealMonsters.jpg");
             break;
             case "invader zim":
             hangmanImage.setAttribute("src", "assets/images/invaderZim.jpg");
@@ -175,16 +176,16 @@ function roundComplete() {
             hangmanImage.setAttribute("src", "assets/images/kablam.jpg");
             break;
             case "krumm":
-            hangmanImage.setAttribute("src", "assets/images/krumm.jpg");
+            hangmanImage.setAttribute("src", "assets/images/ahhRealMonsters.jpg");
             break;
             case "oblina":
-            hangmanImage.setAttribute("src", "assets/images/oblina.jpg");
+            hangmanImage.setAttribute("src", "assets/images/ahhRealMonsters.jpg");
             break;
             case "otto":
             hangmanImage.setAttribute("src", "assets/images/otto.jpg");
             break;
             case "patti mayonaise":
-            hangmanImage.setAttribute("src", "assets/images/allthat.gif");
+            hangmanImage.setAttribute("src", "assets/images/patti.jpg");
             break;
             case "patrick":
             hangmanImage.setAttribute("src", "assets/images/patrick.jpg");
@@ -198,8 +199,11 @@ function roundComplete() {
             case "prometheus":
             hangmanImage.setAttribute("src", "assets/images/pro-bob.jpg");
             break;
-            case "regina":
-            hangmanImage.setAttribute("src", "assets/images/regina.jpg");
+            case "reggie":
+            hangmanImage.setAttribute("src", "assets/images/reggie.jpg");
+            break;
+            case "rocket power":
+            hangmanImage.setAttribute("src", "assets/images/rocket-power.jpg");
             break;
             case "rocko":
             hangmanImage.setAttribute("src", "assets/images/rockos.jpg");
