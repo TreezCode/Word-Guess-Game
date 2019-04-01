@@ -109,6 +109,9 @@ function roundComplete() {
         // Display image on win
         switch (selectWord) {
             case "all that":
+            hangmanImage.setAttribute("src", "assets/images/allthat.gif");
+            break;
+            case "angry beavers":
             hangmanImage.setAttribute("src", "assets/images/angry-beavers.png");
             break;
             case "arnold":
