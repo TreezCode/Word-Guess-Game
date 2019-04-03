@@ -248,6 +248,7 @@ var hideIntro = () => {
 
 // Main Logic
 //============================================================
+
 document.onkeydown = function (event) {
     hideIntro(event.key);
 
