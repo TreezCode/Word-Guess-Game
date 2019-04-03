@@ -151,12 +151,28 @@ h2 {
 
 /* Positions buttons under underscores */
 #button-grid {
-    grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 3;
     grid-row-start: 4;
     grid-row-end: 5;
     text-align: center;
     display: none;
+}
+
+#next-btn {
+    background: rgb(0, 199, 17);
+    color: white;
+    font-family: 'Baloo Chettan', cursive;
+    font-size: 1.1em;
+    margin-top: 1em;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 30px 10px rgba(0,0,0,.75);
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+#next-btn:hover {
+    background: rgb(0, 158, 13)
 }
 
 /* Position scores-grid next to canvas. */
@@ -176,6 +192,10 @@ h2 {
 
 #score-grid p {
     color: white;
+}
+
+#alert-text {
+    font-size: 0.8em;
 }
 
 /* Position guess-bank under the score-grid */

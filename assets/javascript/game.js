@@ -70,10 +70,11 @@ var checkLetters = (letter) => {
             }
         }
         // Check where the letter exists then populate it in hidden word array
-        if (isLetterInWord) {
+        if (isLetterInWord && pause === false) {
             for (var i = 0; i < numOfLetters; i++) {
                 if (selectWord[i] == letter) {
                     hiddenWord[i] = letter;
+                    document.getElementById("alert-text").textContent = "";
                 }
             }
         }
@@ -81,6 +82,7 @@ var checkLetters = (letter) => {
             wrongLetters.push(letter);
             changeHangman();
             guessesLeft--
+            document.getElementById("alert-text").textContent = "";
         }
     }
 }
@@ -214,7 +216,6 @@ var roundComplete = () => {
                 hangmanImage.setAttribute("src", "assets/images/tommy.jpg");
                 break;
         }
-        // Update the win counter in HTML
         document.getElementById("button-grid").style.display = "grid";
         document.getElementById("winCounter").innerHTML = winCount;
         pause = true;
@@ -223,9 +224,7 @@ var roundComplete = () => {
     // Check if user lost
     else if (guessesLeft == 0 && pause === false) {
         lossCount++;
-        // Update the loss counter in HTML
         document.getElementById("lossCounter").innerHTML = lossCount;
-        document.getElementById("button-grid").style.display = "grid";
         pause = true;
 
     }
@@ -244,6 +243,7 @@ var changeHangman = () => {
 var hideIntro = () => {
     document.getElementById("intro-container").style.display = "none";
     document.getElementById("game-container").style.display = "grid";
+    document.getElementById("button-grid").style.display = "grid";
 }
 
 // Main Logic
