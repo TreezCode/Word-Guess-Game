@@ -58,7 +58,7 @@ var checkLetters = (letter) => {
     if (event.keyCode >= 65 && event.keyCode <= 90) {
 
         var alreadyGuessed = false;
-        if (wrongLetters.includes(letter)) {
+        if (wrongLetters.includes(letter) && pause === false) {
             document.getElementById("alert-text").textContent = "You've already guessed that letter.";
             alreadyGuessed = true;
         }
@@ -257,7 +257,7 @@ document.onkeydown = function (event) {
             checkLetters(letterGuessed);
             roundComplete();
         }
-    } else {
+    } else if (pause === false) {
         document.getElementById("alert-text").textContent = ("Please select a valid letter.");
     }
 }
